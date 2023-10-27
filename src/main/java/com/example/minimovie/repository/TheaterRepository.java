@@ -13,4 +13,6 @@ public interface TheaterRepository extends JpaRepository<Theater, Long> {
 //    @Query("SELECT t FROM Theater t JOIN FETCH t s JOIN FETCH s.movie m WHERE t.theaterId = :theaterId")
 //    List<Theater> findTheaterWithScreensAndMoviesByTheaterId(Long theaterId);
 
+    //hjhjhjhjhjhjhjhjhjhjhjhjhjhjhjhjhjhjhjhjh
+
 }
