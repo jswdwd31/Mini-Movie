@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{/layout/basic :: setContent(~{this::content} )}">
+
+    <th:block th:fragment="content">
+        <h2 class="mt-4">영화 목록 페이지</h2> <br>
+
+        <table>
+            <thead>
+            <tr>
+                <th>제목</th>
+                <th>요약</th>
+                <th>등급</th>
+                <th>상영 시간</th>
+                <th>전체 평점</th>
+                <th>평론가 평점</th>
+                <th>일반 평점</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="movie, iterStat : ${movieList}" th:class="${iterStat.odd} ? 'odd' : 'even'">
+                <td class="movie-link" th:text="${movie.title}" th:attr="data-url=@{/movie/movieDetail/__${movie.movieId}__}"></td>
+                <td class="movie-link" th:text="${movie.summary}" th:attr="data-url=@{/movie/movieDetail/__${movie.movieId}__}"></td>
+                <td class="movie-link" th:text="${movie.grade}" th:attr="data-url=@{/movie/movieDetail/__${movie.movieId}__}"></td>
+                <td class="movie-link" th:text="${movie.runningTime}" th:attr="data-url=@{/movie/movieDetail/__${movie.movieId}__}"></td>
+                <td class="movie-link" th:text="${movie.rateToTotal}" th:attr="data-url=@{/movie/movieDetail/__${movie.movieId}__}"></td>
+                <td class="movie-link" th:text="${movie.rateToCritic}" th:attr="data-url=@{/movie/movieDetail/__${movie.movieId}__}"></td>
+                <td class="movie-link" th:text="${movie.rateToGeneral}" th:attr="data-url=@{/movie/movieDetail/__${movie.movieId}__}"></td>
+            </tr>
+            </tbody>
+        </table>
+
+    </th:block>
+
+</th:block>
+
+<script>
+    $(document).ready(function () {
+        $(".movie-link").on("click", function () {
+            // 데이터 속성에서 URL 가져오기
+            var url = $(this).data("url");
+
+            // URL로 이동
+            window.location.href = url;
+        });
+    });
+</script>
+
+<style>
+    .odd {
+        background-color: #f2f2f2; /* 스트라이프 색상 1 */
+    }
+
+    .even {
+        background-color: #ffffff; /* 스트라이프 색상 2 */
+    }
+
+    .movie-link:hover {
+        cursor: pointer;
+    }
+</style>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{/layout/basic :: setContent(~{this::content} )}">
+
+    <th:block th:fragment="content">
+        <h1 class="mt-4">메인페이지</h1>
+
+        <div th:if="${session.loginMember != null}">
+            <h4 th:text="'안녕하세요 ' + ${session.loginMember.nickname} + '님'"></h4>
+
+            <form th:action="@{/member/logout}" method="post">
+            <button class="btn btn-sm btn-danger" type="submit">로그아웃</button>
+            </form>
+        </div>
+
+        <div th:if="${session.loginMember == null}">
+            <a href="member/join">회원가입</a>
+            <a href="member/login">로그인</a>
+        </div>
+
+    </th:block>
+
+</th:block>
+
+<script>
+    $(document).ready(function (e) {
+
+
+    });
+</script>

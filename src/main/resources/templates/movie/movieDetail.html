@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{/layout/basic :: setContent(~{this::content} )}">
+
+    <th:block th:fragment="content">
+        <h2 class="mt-4">영화 상세 페이지</h2>
+
+        <table>
+            <tr>
+                <th>제목</th>
+                <td th:text="${movie.title}"></td>
+            </tr>
+            <tr>
+                <th>요약</th>
+                <td th:text="${movie.summary}"></td>
+            </tr>
+            <tr>
+                <th>등급</th>
+                <td th:text="${movie.grade}"></td>
+            </tr>
+            <tr>
+                <th>상영 시간</th>
+                <td th:text="${movie.runningTime}"></td>
+            </tr>
+            <tr>
+                <th>전체 평점</th>
+                <td th:text="${movie.rateToTotal}"></td>
+            </tr>
+            <tr>
+                <th>평론가 평점</th>
+                <td th:text="${movie.rateToCritic}"></td>
+            </tr>
+            <tr>
+                <th>일반 평점</th>
+                <td th:text="${movie.rateToGeneral}"></td>
+            </tr>
+        </table>
+
+        <button class="btn btn-sm btn-secondary" onclick="history.back()">목록으로</button>
+
+    </th:block>
+
+</th:block>
+
+<script>
+    $(document).ready(function () {
+
+    });
+</script>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{/layout/basic :: setContent(~{this::content} )}">
+
+    <th:block th:fragment="content">
+        <h2 class="mt-4">회원가입</h2>
+
+        <form th:action="@{/member/join}" th:object="${memberRequestDto}" th:method="post">
+            <table>
+                <thead></thead>
+                <tbody>
+                <tr>
+                    <td>아이디:</td>
+                    <td><input type="text" class="form-control-sm" name="identity" placeholder="아이디를 입력하세요" required></td>
+                </tr>
+                <tr>
+                    <td>비밀번호:</td>
+                    <td><input type="password" class="form-control-sm" name="password" placeholder="비밀번호를 입력하세요" required></td>
+                </tr>
+                <tr>
+                    <td>닉네임:</td>
+                    <td><input type="text" class="form-control-sm" name="nickname" placeholder="아이디를 입력하세요" required></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <button class="btn btn-sm btn-primary" type="submit">가입</button>
+                        <button class="btn btn-sm btn-danger" type="reset">초기화</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+
+    </th:block>
+
+</th:block>
+
+<script>
+    $(document).ready(function () {
+        $("form").on("submit", function (event) {
+            event.preventDefault(); // 폼 제출을 방지하여 기본 동작을 중단합니다.
+
+            // Ajax를 사용하여 서버에 요청을 보냅니다.
+            $.ajax({
+                url: $(this).attr("action"),
+                method: "POST",
+                data: $(this).serialize(),
+                success: function (response) {
+                    // 성공적인 응답 처리
+                    alert("회원가입이 완료되었습니다.");
+                    // 홈 페이지로 리디렉션
+                    window.location.href = "/home";
+                },
+                error: function (xhr, status, error) {
+                    if (xhr.status === 500) {
+                        // 500 에러가 발생한 경우 경고창을 띄우고 페이지를 리로드합니다.
+                        alert("아이디가 중복되었습니다. 다시 시도해주세요");
+                        $("input[name='identity']").val("");
+                        $("input[name='identity']").focus();
+                        return;
+                    }
+                }
+            });
+        });
+    });
+</script>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{/layout/basic :: setContent(~{this::content} )}">
+
+    <th:block th:fragment="content">
+        <h2 class="mt-4">극장 목록 페이지</h2> <br>
+
+        <table>
+            <thead>
+            <tr>
+                <th>이름</th>
+                <th>위치</th>
+                <th>전화번호</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="theater, iterStat : ${theaterList}" th:class="${iterStat.odd} ? 'odd' : 'even'">
+                <td class="movie-link" th:text="${theater.name}" th:attr="data-url=@{/theater/theaterDetail/__${theater.theaterId}__}"></td>
+                <td class="movie-link" th:text="${theater.location}" th:attr="data-url=@{/theater/theaterDetail/__${theater.theaterId}__}"></td>
+                <td class="movie-link" th:text="${theater.telephone}" th:attr="data-url=@{/theater/theaterDetail/__${theater.theaterId}__}"></td>
+            </tr>
+            </tbody>
+        </table>
+
+    </th:block>
+
+</th:block>
+
+<script>
+    $(document).ready(function () {
+        $(".movie-link").on("click", function () {
+            // 데이터 속성에서 URL 가져오기
+            var url = $(this).data("url");
+
+            // URL로 이동
+            window.location.href = url;
+        });
+    });
+</script>
+
+<style>
+    .odd {
+        background-color: #f2f2f2; /* 스트라이프 색상 1 */
+    }
+
+    .even {
+        background-color: #ffffff; /* 스트라이프 색상 2 */
+    }
+
+    .movie-link:hover {
+        cursor: pointer;
+    }
+</style>

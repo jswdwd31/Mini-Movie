@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{/layout/basic :: setContent(~{this::content} )}">
+
+    <th:block th:fragment="content">
+        <h2 class="mt-4">극장 상세 페이지</h2>
+
+        <table>
+            <tr>
+                <th>이름</th>
+                <td th:text="${theater.name}"></td>
+            </tr>
+            <tr>
+                <th>위치</th>
+                <td th:text="${theater.location}"></td>
+            </tr>
+            <tr>
+                <th>전화번호</th>
+                <td th:text="${theater.telephone}"></td>
+            </tr>
+
+        </table>
+
+        <button class="btn btn-sm btn-secondary" onclick="history.back()">목록으로</button>
+
+    </th:block>
+
+</th:block>
+
+<script>
+    $(document).ready(function () {
+
+    });
+</script>
